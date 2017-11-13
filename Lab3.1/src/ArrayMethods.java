@@ -11,9 +11,13 @@ public class ArrayMethods
 			intArray[i] = (int)(Math.random() * 10);
 		}*/
 		printArray(intArray);
+		System.out.println();
 		printArray(removeDuplicates(intArray));
+		System.out.println();
 		printArray(productArray(arr1,arr2));
-
+		System.out.println();
+		pascalTriangle(6);
+		pascalTriangle2(6);
 	}
 	public static int[] removeDuplicates(int[] list)
 	{
@@ -57,15 +61,43 @@ public class ArrayMethods
 		}
 		return product; 
 	}
-	public static int[][] pascalTriangle(int n)
+	public static int[] pascalTriangle(int n)
 	{
-		int[][] pascArr = new int[n][n];
-		for (int i = 0; i < n; i++)
+		  int[] previousRow;
+	       int[] currentRow = {1};
+	       printArray(currentRow);
+	       previousRow = currentRow;
+	       for (int i = 2; i <= n; i++) {
+	           currentRow = new int[i];
+	           currentRow[0] = 1;
+	           currentRow[i - 1] = 1;
+	           for (int j = 0; j <= i - 3; j++) {
+	               currentRow[j + 1] = previousRow[j] + previousRow[j + 1];
+	           }
+	           printArray(currentRow);
+	           previousRow = currentRow;
+	       }
+		return currentRow;
+	}
+	public static int[][] pascalTriangle2(int n)
+	{
+		int[][] rows = new int [n][n];
+		rows[0] = new int [1];
+		rows[0][0] = 1;
+		for (int i = 0; i <= n; i++)
 		{
-			int[] tempArr = new int[i];
-			pascArr[i] = tempArr;
+			for (int j = 2; j <= n; j++)
+			{
+				rows[i] = new int[j];
+				rows[i][0]= 1;
+				rows[i][i-1] = 1;
+				for(int k = 0; k <= n-3; k++)
+				{
+					rows[i][k+1] = rows[i-1][k] + rows[i-1][k+1];
+				}
+			}
 		}
-		return null;
+		return rows;
 	}
 	public static void printPascalTriangle(int [][] pTriangle)
 	{
