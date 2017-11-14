@@ -3,22 +3,18 @@ public class ArrayMethods
 {
 	public static void main(String[] args)
 	{
-		int[] intArray = new int[]{4,2,3,2,3,5};
+		int[] intArray = new int[]{4,2,3,2,3,5};/* */
 		int[] arr1 = new int[] {1,2,3};
 		int[] arr2 = new int[] {4,6,5};
-		/*for(int i = 0; i < intArray.length; i++)
-		{
-			intArray[i] = (int)(Math.random() * 10);
-		}*/
 		printArray(intArray);
 		System.out.println();
 		printArray(removeDuplicates(intArray));
 		System.out.println();
 		printArray(productArray(arr1,arr2));
 		System.out.println();
-		pascalTriangle(6);
-		pascalTriangle2(6);
+		printPascalTriangle(pascalTriangle(8));
 	}
+	/*removeDuplicates removes all the duplicate elements in a given array, list */
 	public static int[] removeDuplicates(int[] list)
 	{
 		int inc = 0;
@@ -49,6 +45,7 @@ public class ArrayMethods
 		}
 		return temp2;
 	}
+	/*porductArray takes two different arrays of equal length and returns a two-dimensional array containing the products of those arrays */
 	public static int[][] productArray(int[] arr1,int[] arr2)
 	{
 		int[][]product = new int[arr1.length][arr2.length];
@@ -61,48 +58,44 @@ public class ArrayMethods
 		}
 		return product; 
 	}
-	public static int[] pascalTriangle(int n)
+	/*pascalTriangle creates the world famous pascal triangle, with the length n which is given as a parameter */
+	public static int[][] pascalTriangle(int n)
 	{
-		  int[] previousRow;
-	       int[] currentRow = {1};
-	       printArray(currentRow);
-	       previousRow = currentRow;
-	       for (int i = 2; i <= n; i++) {
-	           currentRow = new int[i];
-	           currentRow[0] = 1;
-	           currentRow[i - 1] = 1;
-	           for (int j = 0; j <= i - 3; j++) {
-	               currentRow[j + 1] = previousRow[j] + previousRow[j + 1];
-	           }
-	           printArray(currentRow);
-	           previousRow = currentRow;
-	       }
-		return currentRow;
-	}
-	public static int[][] pascalTriangle2(int n)
-	{
-		int[][] rows = new int [n][n];
-		rows[0] = new int [1];
-		rows[0][0] = 1;
-		for (int i = 0; i <= n; i++)
+		int[][] rows = new int [n][];
+		for(int i = 0; i < n; i++)
 		{
-			for (int j = 2; j <= n; j++)
+			rows[i] = new int [i + 1];
+			for(int j = 0; j < i +1; j++)
 			{
-				rows[i] = new int[j];
-				rows[i][0]= 1;
-				rows[i][i-1] = 1;
-				for(int k = 0; k <= n-3; k++)
+				if(j == 0 || j == i)
 				{
-					rows[i][k+1] = rows[i-1][k] + rows[i-1][k+1];
+					rows[i][j] = 1;
 				}
+				else
+				{	
+					rows[i][j] = rows[i -1][j -1] + rows[i -1][j];
+				}	
 			}
 		}
 		return rows;
 	}
+	/*printPascalTriangle this method prints the world famous Pascal triangle that we created in the method above */
 	public static void printPascalTriangle(int [][] pTriangle)
 	{
-		
+		for(int i = 0; i < pTriangle.length; i++)
+		{
+			for(int h = 0; h < pTriangle.length-i; h++)
+			{
+					System.out.print("   ");
+			}
+			for (int j = 0; j < pTriangle[i].length; j++)
+			{
+				System.out.print("[" + pTriangle[i][j] + "]   ");
+			}
+			System.out.println();
+		}
 	}
+	/*copyArray copies an array(taken from a previous activity)*/
 	public 	static int[] copyArray(int[] intArray)
 	{
 		int[] copy = new int[intArray.length];
@@ -113,6 +106,7 @@ public class ArrayMethods
 		return copy;
 			
 	}
+	/*printArray prints an array(taken from a previous activity) */
 	public static void printArray(int[] arr)
 	{
 		for(int i = 0; i < arr.length; i++)
@@ -121,6 +115,7 @@ public class ArrayMethods
 		}
 		System.out.println();
 	}
+	/*overloaded printArray method for a two-dimensional array */
 	public static void printArray(int[][] arr)
 	{
 		for(int i = 0; i < arr.length; i++)
